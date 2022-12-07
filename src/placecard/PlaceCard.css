@@ -1,0 +1,113 @@
+.r6o-g8r-card {
+  position:relative;
+  height:140px;
+}
+
+.r6o-g8r-card .minimap {
+  position:absolute;
+  width:100%;
+  height:100%;
+  z-index:1;
+}
+
+.r6o-g8r-card .r6o-g8r-card-content-wrapper {
+  position:relative;
+  width:100%;
+  height:140px;
+  box-sizing:border-box;
+  padding-right:165px;
+  pointer-events:none;
+  overflow:hidden;
+  z-index:2;
+}
+
+.r6o-g8r-card .r6o-g8r-card-metadata {
+  pointer-events:auto;
+  height:100%;
+  padding: 7px 15px 12px 15px;
+  box-sizing:border-box;
+  margin:0;
+  background-color:rgba(245, 247, 247, 0.8);
+  position:relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.r6o-g8r-card .r6o-g8r-card-metadata h3 {
+  margin:0;
+  padding:0;
+  white-space:nowrap;
+  text-overflow:ellipsis;
+  overflow:hidden;
+  font-size:17px;
+  font-weight:normal;
+  line-height:21px;
+}
+
+.r6o-g8r-card .r6o-g8r-card-metadata p {
+  margin:0;
+  padding:0;
+  font-size:14px;
+  line-height:18px;
+  overflow:hidden;
+  white-space:nowrap;
+  text-overflow:ellipsis;
+  color:#767676;
+}
+
+.r6o-g8r-card .r6o-g8r-card-metadata a {
+  color:#3f3f3f;
+}
+
+.r6o-g8r-card .r6o-g8r-card-metadata button.edit-match {
+  background-color: #4483c4;
+  color: #fff;
+  outline: none;
+  border: none;
+  padding: 4px 7px 4px 4px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.r6o-g8r-card .r6o-g8r-card-metadata button.edit-match svg {
+  font-size: 15px;
+  vertical-align: text-top;
+}
+
+.r6o-g8r-card .r6o-g8r-card-metadata .suggestion-warning {
+  width:100%;
+  box-sizing:border-box;
+  position:absolute;
+  bottom:0;
+  left:0;
+  padding:3px 5px 3px 8px;
+  font-size:14px;
+  background-color:rgba(240, 173, 78, 0.18);
+  border-top:1px solid #f0ad4e;
+  color:#ec971f;
+  line-height:25px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.r6o-g8r-card .r6o-g8r-card-metadata .suggestion-warning .warning svg {
+  font-size: 16px;
+  vertical-align: text-top;
+  padding-right: 2px;
+}
+
+.r6o-g8r-card .r6o-g8r-card-metadata .suggestion-warning .buttons button {
+  float:right;
+  background-color:#f0ad4e;
+  margin:1px 3px 0 0;
+  font-size: 13px;
+  border:none;
+  padding:4px 6px;
+  color: #fff;
+  border-radius: 4px;
+  cursor: pointer;
+}
