@@ -22,7 +22,8 @@ const Sidebar = props => {
           <ResultList 
             results={props.results} 
             selected={props.selected}
-            onSelect={props.onSelectResult} />
+            onSelect={props.onSelectResult} 
+            onLoadMore={props.onLoadMore} />
         </main>
       </section>
 

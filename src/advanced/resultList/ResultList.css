@@ -16,13 +16,14 @@
 
 .whg-search-results-list li {
   border-bottom:1px solid #e5e5e5;
+  background-color: #fff;
   padding:10px;
   cursor:pointer;
 }
 
 .whg-search-results-list li.selected {
-  border-bottom:1px solid #e5e5e5;
-  background-color: #ededed;
+  border-bottom:1px solid #d0e5fb;
+  background-color: #e0efff;
 }
 
 .whg-search-results-list li h3 {
@@ -65,4 +66,14 @@
 
 .whg-search-results-list li:hover:not(.selected) {
   background-color:rgba(0, 0, 0, 0.015);
+}
+
+.whg-search-results-list button.load-more {
+  width: 100%;
+  padding: 20px;
+  outline: none;
+  border: none;
+  color: #3f3f3f;
+  background-color: #efefef;
+  cursor: pointer;
 }

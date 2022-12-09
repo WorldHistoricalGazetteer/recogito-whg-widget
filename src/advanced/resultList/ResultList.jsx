@@ -28,9 +28,6 @@ const Result = props => {
         </p>
       )}
       <p className="uris"></p>
-      {/* descriptions.length > 0 && 
-        <p>{descriptions[0]}</p> 
-      */}
     </li>
   )
 
@@ -48,6 +45,9 @@ const SearchResults = props => {
             onClick={() => props.onSelect(result)} />
         )}
       </ul>
+      <button 
+        className="load-more"
+        onClick={props.onLoadMore}>+ Load more</button>
     </div>
   )
 

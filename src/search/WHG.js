@@ -4,7 +4,7 @@ export const createClient = config => {
   if (!baseURL.endsWith('/'))
     baseURL += '/';
 
-  const searchIndex = query => 
+  const searchIndex = (query, offset) => 
     fetch(`${baseURL}?name=${query}`)
       .then(res => res.json())
       .then(data => data.features || []);

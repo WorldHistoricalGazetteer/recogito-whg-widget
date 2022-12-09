@@ -7,12 +7,15 @@ import bbox from '@turf/bbox';
 import SearchInput from '../search/SearchInput';
 import Sidebar from './Sidebar';
 import { GreyMarker } from '../Markers';
+import { createClient } from '../search/WHG';
 
 // Shorthand
 const getCentroid = feature =>
   centroid(feature)?.geometry.coordinates.slice().reverse();
 
 const AdvancedModal = props => {
+
+  const whg = createClient(props.config);
 
   const [map, setMap] = useState(null);
 
@@ -165,6 +168,12 @@ const AdvancedModal = props => {
     map.panTo(center.geometry.coordinates.slice().reverse());
   }
 
+  const onLoadMore = () => {
+    whg.searchIndex(props.search, 10).then(results => {
+      console.log('more', results);
+    });
+  }
+
   return ReactDOM.createPortal(
     <div className="r6o-geotagging-advanced-container">
       <div className="r6o-geotagging-advanced-modal" role="dialog">
@@ -207,7 +216,8 @@ const AdvancedModal = props => {
           <Sidebar 
             results={searchResults} 
             selected={selectedResult}
-            onSelectResult={onSelectFromList} />
+            onSelectResult={onSelectFromList} 
+            onLoadMore={onLoadMore} />
         </main>
       </div>
     </div>, document.body);
