@@ -89,22 +89,25 @@ const AdvancedModal = props => {
   useEffect(() => {
     if (map) {
       clearMap();
-
-      searchResults.forEach(result => {
-        L.geoJSON(result, {
-          pointToLayer: function (feature, latlng) {
-            const marker = (result.properties.index_id === selectedResult?.properties.index_id) ? 
-              L.marker(latlng) :
-              L.marker(latlng, { icon: GreyMarker });
-
-            marker.on('click', () => setSelectedResult(result));
-
-            return marker;
-          }
-        }).addTo(map);
-      });
+      drawSearchResults();
     }
   }, [ map, searchResults, selectedResult ]);
+
+  const drawSearchResults = () => {
+    searchResults.forEach(result => {
+      L.geoJSON(result, {
+        pointToLayer: function (feature, latlng) {
+          const marker = (result.properties.index_id === selectedResult?.properties.index_id) ? 
+            L.marker(latlng) :
+            L.marker(latlng, { icon: GreyMarker });
+
+          marker.on('click', () => setSelectedResult(result));
+
+          return marker;
+        }
+      }).addTo(map);
+    });
+  }
 
   const onOk = () => {
     if (selectedResult) {
@@ -146,17 +149,9 @@ const AdvancedModal = props => {
   }
 
   const onSearch = ({ results }) => {
-    clearMap();
-
     setSearchResults(results);
 
     if (results.length > 0) {
-      const layer = L.geoJSON(results[0]).addTo(map);
-
-      // Remove URI if user changes anything
-      layer.on('pm:edit', evt =>
-        delete evt.layer.feature.properties.uri);
-
       setSelectedResult(results[0]);
       fitMap(results);
     }
@@ -172,6 +167,21 @@ const AdvancedModal = props => {
     whg.searchIndex(props.search, 10).then(results => {
       console.log('more', results);
     });
+  }
+
+  const onTogglePanel = name => {
+    clearMap();
+
+    if (name === 'create') {
+      setEditingEnabled(true);
+    } else {
+      setEditingEnabled(false);
+      if (searchResults.length > 0) {
+        setSelectedResult(searchResults[0]);
+        drawSearchResults();
+        fitMap(searchResults);
+      }
+    }
   }
 
   return ReactDOM.createPortal(
@@ -217,7 +227,8 @@ const AdvancedModal = props => {
             results={searchResults} 
             selected={selectedResult}
             onSelectResult={onSelectFromList} 
-            onLoadMore={onLoadMore} />
+            onLoadMore={onLoadMore} 
+            onTogglePanel={onTogglePanel} />
         </main>
       </div>
     </div>, document.body);

@@ -9,13 +9,22 @@ const Sidebar = props => {
 
   const [open, setOpen] = useState(1);
 
+  const onTogglePanel = idx => {
+    setOpen(idx);
+
+    if (idx === 1)
+      props.onTogglePanel('search');
+    else 
+      props.onTogglePanel('create');
+  }
+
   return (
     <aside className="whg-sidebar">
       <section 
         className={open === 1 ? 'result-list' : 'result-list closed'}>
         <header 
           className="accordion-header"
-          onClick={() => setOpen(1)}>
+          onClick={() => onTogglePanel(1)}>
           <FaList /> <span>{props.results.length} Results</span>
         </header>
         <main className="accordion-content">
@@ -31,7 +40,7 @@ const Sidebar = props => {
         className={open === 2 ? 'create-new' : 'create-new closed'}>
         <header 
           className="accordion-header"
-          onClick={() => setOpen(2)}>
+          onClick={() => onTogglePanel(2)}>
           <GoPencil /> Create New Place
         </header>
 
