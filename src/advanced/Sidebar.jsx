@@ -1,18 +1,13 @@
 import React from 'react';
+import ResultList from './resultList/ResultList';
 
 import './Sidebar.css';
 
 const Sidebar = props => {
 
-  const { results } = props;
-
-  console.log(results);
-
   return (
     <aside className="whg-sidebar">
-      <ul>
-
-      </ul>
+      <ResultList results={props.results} />
     </aside>
   )
 

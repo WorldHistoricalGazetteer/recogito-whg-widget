@@ -1,0 +1,66 @@
+.whg-search-results-list {
+  height: 100%;
+  border-top: 1px solid #e5e5e5;
+}
+
+.whg-search-results-list ul {
+  list-style-type:none;
+  padding:1px 0;
+  margin:0;
+  color: #3f3f3f;
+  font-family: Lato, sans-serif;
+  overflow-y:scroll;
+  height: 100%;
+}
+
+.whg-search-results-list a {
+  color: #3f3f3f;
+}
+
+.whg-search-results-list li {
+  border-bottom:1px solid #e5e5e5;
+  padding:10px;
+  cursor:pointer;
+}
+
+.whg-search-results-list li h3 {
+  margin:0;
+  padding:0;
+  white-space:nowrap;
+  text-overflow:ellipsis;
+  overflow:hidden;
+  font-size:17px;
+  font-weight:normal;
+  line-height:21px;
+}
+
+.whg-search-results-list li p {
+  margin:0;
+  padding:1px 0;
+  font-size:14px;
+  line-height:18px;
+  overflow:hidden;
+  white-space:nowrap;
+  text-overflow:ellipsis;
+  color:#767676;
+}
+
+.whg-search-results-list li p.uris a.minilink {
+  display:inline-block;
+  background-color:#9ca4b1;
+  width:16px;
+  height:16px;
+  line-height:16px;
+  margin:0 3px 0 1px;
+  border-radius:50%;
+  color:#fff;
+  text-align:center;
+  font-weight:bold;
+  font-size:11px;
+  text-decoration:none;
+  margin-bottom:1px;
+}
+
+.whg-search-results-list li:hover {
+  background-color:rgba(0, 0, 0, 0.015);
+}

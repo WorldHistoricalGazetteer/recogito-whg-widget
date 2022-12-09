@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
 import { IoCheckmarkOutline, IoCloseOutline } from 'react-icons/io5';
 import { MapContainer, TileLayer } from 'react-leaflet';
@@ -17,33 +17,42 @@ const AdvancedModal = props => {
 
   const [okEnabled, setOkEnabled] = useState(true);
 
+  const [editingEnabled, setEditingEnabled] = useState(false);
+
   const [searchResults, setSearchResults] = useState(props.initialResults);
 
-  const fitMap = feature => {
-    const isPoint = feature?.geometry?.type === 'Point';
+  const fitMap = features => {
+    const bounds = bbox({
+      type: 'FeatureCollection',
+      features
+    });
+
+    console.log({
+      type: 'FeatureCollection',
+      features
+    }, bounds);
+
+    const isPoint = bounds.geometry?.type === 'Point';
 
     const maxZoom = props.config.defaultZoom;
 
     if (isPoint) {
       map.setView(getCentroid(feature), maxZoom);
     } else {
-      const bounds = bbox(feature);
       map.fitBounds([
         [bounds[1], bounds[0]],
         [bounds[3], bounds[2]]
-      ]);  
+      ], {
+        animate:false,
+        padding: [30, 30]
+      });  
     }
   }
   
   useEffect(() => {
     if (map) {
-      if (props.feature)
-        L.geoJSON(props.feature).addTo(map);
-
-      map.pm.addControls({ 
-        position: 'topleft',
-        drawCircle: false,
-        drawCircleMarker: false 
+      searchResults.forEach(result => {
+        L.geoJSON(result).addTo(map);
       });
 
       // Dis- or enable the OK button depending on whether there's a feature
@@ -57,9 +66,21 @@ const AdvancedModal = props => {
           setOkEnabled(false);
       });
 
-      fitMap(props.feature);
+      fitMap(searchResults);
     }
-  }, [ map ]);
+  }, [ map, editingEnabled ]);
+
+  useEffect(() => {
+    if (editingEnabled) {
+      map?.pm?.addControls({ 
+        position: 'topleft',
+        drawCircle: false,
+        drawCircleMarker: false 
+      });
+    } else {
+      map?.pm?.removeControls();  
+    }
+  }, [ editingEnabled ]);
 
   const onOk = () => {
     const geojson = map.pm
@@ -109,7 +130,7 @@ const AdvancedModal = props => {
       layer.on('pm:edit', evt =>
         delete evt.layer.feature.properties.uri);
 
-      fitMap(results[0]);
+      fitMap(results);
     }
   }
 
@@ -146,7 +167,6 @@ const AdvancedModal = props => {
             className="whg-map"
             zoom={props.config.defaultZoom}
             preferCanvas={true}
-            center={getCentroid(props.feature)}
             whenCreated={setMap}>
 
             <TileLayer
