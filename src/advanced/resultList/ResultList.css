@@ -1,5 +1,4 @@
 .whg-search-results-list {
-  height: 100%;
   border-top: 1px solid #e5e5e5;
 }
 
@@ -9,8 +8,6 @@
   margin:0;
   color: #3f3f3f;
   font-family: Lato, sans-serif;
-  overflow-y:scroll;
-  height: 100%;
 }
 
 .whg-search-results-list a {

@@ -5,3 +5,39 @@
   bottom: 0;
   width: 260px;
 }
+
+.whg-sidebar section {
+  height: calc(100% - 40px);
+  position: relative;
+  transition: height 0.25s;
+}
+
+.whg-sidebar section.closed {
+  height: 40px;
+}
+
+.whg-sidebar section header.accordion-header {
+  background-color: #4483c4;
+  border-bottom: 1px solid #5696d9;
+  color: #fff;
+  height: 40px;
+  box-sizing: border-box;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.whg-sidebar section header.accordion-header svg {
+  padding-right: 5px;
+}
+
+.whg-sidebar section main.accordion-content {
+  height: calc(100% - 40px);
+  overflow-y: scroll;
+  transition: height 0.25s;
+}
+
+.whg-sidebar section.closed main.accordion-content {
+  height: 0;
+}
