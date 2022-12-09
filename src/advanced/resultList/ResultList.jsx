@@ -4,16 +4,16 @@ import './ResultList.css';
 
 const Result = props => {
 
-  const { result, onClick } = props;
-
-  console.log(result);
+  const { result, selected, onClick } = props;
 
   const { properties } = result;
 
   const permalink = `https://whgazetteer.org/places/${properties.index_id}/portal`;
 
   return (
-    <li onClick={onClick}>
+    <li 
+      className={selected.properties.index_id === result.properties.index_id ? 'selected' : null}
+      onClick={onClick}>
       <h3>
         {properties.title} {properties.ccodes?.length > 0 && (
           <span>({properties.ccodes.join(', ')})</span>
@@ -42,7 +42,10 @@ const SearchResults = props => {
     <div className="whg-search-results-list">
       <ul>
         {props.results.map(result =>
-          <Result result={result} />
+          <Result 
+            result={result} 
+            selected={props.selected}
+            onClick={() => props.onSelect(result)} />
         )}
       </ul>
     </div>

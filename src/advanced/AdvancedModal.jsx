@@ -6,6 +6,7 @@ import centroid from '@turf/centroid';
 import bbox from '@turf/bbox';
 import SearchInput from '../search/SearchInput';
 import Sidebar from './Sidebar';
+import { GreyMarker } from '../Markers';
 
 // Shorthand
 const getCentroid = feature =>
@@ -21,16 +22,20 @@ const AdvancedModal = props => {
 
   const [searchResults, setSearchResults] = useState(props.initialResults);
 
+  const [selectedResult, setSelectedResult] = useState(props.feature);
+
+  const clearMap = () => {
+    map.eachLayer(layer => {
+      if (layer.feature)
+        map.removeLayer(layer);
+    });
+  }
+
   const fitMap = features => {
     const bounds = bbox({
       type: 'FeatureCollection',
       features
     });
-
-    console.log({
-      type: 'FeatureCollection',
-      features
-    }, bounds);
 
     const isPoint = bounds.geometry?.type === 'Point';
 
@@ -51,10 +56,6 @@ const AdvancedModal = props => {
   
   useEffect(() => {
     if (map) {
-      searchResults.forEach(result => {
-        L.geoJSON(result).addTo(map);
-      });
-
       // Dis- or enable the OK button depending on whether there's a feature
       map.on('pm:create', () => {
         setOkEnabled(true);
@@ -82,40 +83,63 @@ const AdvancedModal = props => {
     }
   }, [ editingEnabled ]);
 
-  const onOk = () => {
-    const geojson = map.pm
-      .getGeomanLayers()
-      .map(l =>  l.toGeoJSON());
+  useEffect(() => {
+    if (map) {
+      clearMap();
 
-    if (geojson.length === 1) {
-      props.onOk({
-        type: 'Feature',
-        properties: {
-          ...geojson[0].properties,
-          is_confirmed: true
-        },
-        geometry: geojson[0].geometry,
+      searchResults.forEach(result => {
+        L.geoJSON(result, {
+          pointToLayer: function (feature, latlng) {
+            const marker = (result.properties.index_id === selectedResult?.properties.index_id) ? 
+              L.marker(latlng) :
+              L.marker(latlng, { icon: GreyMarker });
+
+            marker.on('click', () => setSelectedResult(result));
+
+            return marker;
+          }
+        }).addTo(map);
       });
-    } else if (geojson.length > 1) {
+    }
+  }, [ map, searchResults, selectedResult ]);
+
+  const onOk = () => {
+    if (selectedResult) {
       props.onOk({
-        type: 'Feature',
-        geometry: {
-          type: 'GeometryCollection',
+        ...selectedResult,
+        properties: {
+          ...selectedResult.properties,
+          is_confirmed: true
+        }
+      });
+    } else {
+      const geojson = map.pm
+        .getGeomanLayers()
+        .map(l =>  l.toGeoJSON());
+
+      if (geojson.length === 1) {
+        props.onOk({
+          type: 'Feature',
           properties: {
             ...geojson[0].properties,
             is_confirmed: true
           },
-          geometries: geojson.map(g => g.geometry)
-        }
-      });
+          geometry: geojson[0].geometry,
+        });
+      } else if (geojson.length > 1) {
+        props.onOk({
+          type: 'Feature',
+          geometry: {
+            type: 'GeometryCollection',
+            properties: {
+              ...geojson[0].properties,
+              is_confirmed: true
+            },
+            geometries: geojson.map(g => g.geometry)
+          }
+        });
+      }
     }
-  }
-
-  const clearMap = () => {
-    map.eachLayer(layer => {
-      if (layer.feature)
-        map.removeLayer(layer);
-    });
   }
 
   const onSearch = ({ results }) => {
@@ -130,8 +154,15 @@ const AdvancedModal = props => {
       layer.on('pm:edit', evt =>
         delete evt.layer.feature.properties.uri);
 
+      setSelectedResult(results[0]);
       fitMap(results);
     }
+  }
+
+  const onSelectFromList = result => {
+    setSelectedResult(result);
+    const center = centroid(result);
+    map.panTo(center.geometry.coordinates.slice().reverse());
   }
 
   return ReactDOM.createPortal(
@@ -173,7 +204,10 @@ const AdvancedModal = props => {
               url={props.config.tileUrl} />
           </MapContainer>  
           
-          <Sidebar results={searchResults} />
+          <Sidebar 
+            results={searchResults} 
+            selected={selectedResult}
+            onSelectResult={onSelectFromList} />
         </main>
       </div>
     </div>, document.body);

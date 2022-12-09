@@ -98,7 +98,7 @@ const GeoTaggingWidget = props => {
         <AdvancedModal 
           config={props.config}
           search={search}
-          initialResults={searchResults}
+          initialResults={searchResults || [ body ]}
           feature={body}
           onChangeSearch={setSearch}
           onOk={onAdvacedEditingDone}
