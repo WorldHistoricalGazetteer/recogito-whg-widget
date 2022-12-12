@@ -14,8 +14,8 @@ const CreateNew = props => {
       <h2>Use the drawing tools to create a new place.</h2>
       <form onSubmit={onSubmit}>
         <section>
-          <input type="text" name="title" />
-          <input type="text" name="date" />
+          <input type="text" name="title" placeholder="Title (required)" />
+          <input type="text" name="date" placeholder="Date" />
         </section>
 
         <section className="featuretypes">

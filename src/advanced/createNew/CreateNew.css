@@ -1,3 +1,36 @@
 .whg-create-new {
-  
+  padding: 15px;
+}
+
+.whg-create-new h2 {
+  font-weight: normal;
+  font-size: 16px;
+  text-align: center;
+}
+
+.whg-create-new input,
+.whg-create-new textarea {
+  padding: 10px;
+  margin-bottom: 10px;
+  box-sizing: border-box;
+  border: 1px solid #333;
+  outline: none;
+  border-radius: 3px;
+  width: 100%;
+}
+
+.whg-create-new .add-featuretype {
+  background-color: none;
+  color: #4483c4;
+  border: none;
+  outline: none;
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+
+.whg-create-new input[type=submit] {
+  background-color: #4483c4;
+  color: #fff;
+  border: 1px solid #4483c4;
+  cursor: pointer;
 }
