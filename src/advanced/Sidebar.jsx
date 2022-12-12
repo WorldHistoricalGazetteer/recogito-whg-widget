@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { FaList } from 'react-icons/fa';
 import { GoPencil } from 'react-icons/go';
+import CreateNew from './createNew/CreateNew';
 import ResultList from './resultList/ResultList';
 
 import './Sidebar.css';
@@ -45,7 +46,8 @@ const Sidebar = props => {
         </header>
 
         <main className="accordion-content">
-
+          <CreateNew 
+            onSave={props.onCreateNewPlace} />
         </main>
       </section>
     </aside>

@@ -197,6 +197,10 @@ const AdvancedModal = props => {
     }
   }
 
+  const onCreateNewPlace = metadata => {
+    console.log('create new place', metadata);
+  }
+
   return ReactDOM.createPortal(
     <div className="r6o-geotagging-advanced-container">
       <div className="r6o-geotagging-advanced-modal" role="dialog">
@@ -241,6 +245,7 @@ const AdvancedModal = props => {
             selected={selectedResult}
             onSelectResult={onSelectFromList} 
             onLoadMore={onLoadMore} 
+            onCreateNewPlace={onCreateNewPlace}
             onTogglePanel={onTogglePanel} />
         </main>
       </div>
