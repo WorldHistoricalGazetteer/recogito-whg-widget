@@ -19,7 +19,11 @@ const VocabularyModal = props => {
   return (
     <div className="whg-vocabulary-modal-wrapper">
       <div className="whg-vocabulary-modal">
-        <Autocomplete vocabulary={FEATURETYPES} />
+        <Autocomplete 
+          focus 
+          vocabulary={FEATURETYPES} 
+          placeholder="Search AAT feature types or type your own" 
+          onSubmit={props.onAddFeatureType} />
       </div>
     </div>
   )

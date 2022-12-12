@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { AiOutlineSearch } from 'react-icons/ai';
 
 const getVocabSuggestions = (query, vocabulary) =>
   vocabulary.filter(item => {
@@ -134,6 +135,8 @@ const Autocomplete = props => {
       ref={element}  
       className="r6o-autocomplete">
       <div>
+        <AiOutlineSearch />
+        
         <input
           onKeyDown={onKeyDown}
           onChange={onChange}

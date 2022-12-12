@@ -19,3 +19,24 @@
   border-radius: 4px;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
 }
+
+.whg-vocabulary-modal .r6o-autocomplete ul {
+  width: 100%;
+  margin-top: 5px;
+}
+
+.whg-vocabulary-modal .r6o-autocomplete svg {
+  position: absolute;
+  font-size: 26px;
+  top: 5px;
+  left: 5px;
+}
+
+.whg-vocabulary-modal .r6o-autocomplete input {
+  margin-bottom: 0;
+  padding-left: 40px;
+}
+
+.whg-vocabulary-modal .r6o-autocomplete li {
+  padding: 6px 12px;
+}
