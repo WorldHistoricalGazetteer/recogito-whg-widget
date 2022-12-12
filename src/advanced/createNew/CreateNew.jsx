@@ -68,7 +68,7 @@ const CreateNew = props => {
       </section>
 
       <section>
-        <button onClick={onSubmit}>Save</button>
+        <button className="submit" onClick={onSubmit}>Save</button>
       </section>
 
       {modalOpen && (

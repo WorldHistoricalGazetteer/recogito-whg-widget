@@ -28,9 +28,14 @@
   cursor: pointer;
 }
 
-.whg-create-new input[type=submit] {
+.whg-create-new button.submit {
   background-color: #4483c4;
   color: #fff;
   border: 1px solid #4483c4;
   cursor: pointer;
+  padding: 10px;
+  box-sizing: border-box;
+  outline: none;
+  border-radius: 3px;
+  width: 100%;
 }

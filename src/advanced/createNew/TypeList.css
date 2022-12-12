@@ -1,0 +1,50 @@
+.whg-taglist ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.whg-taglist li {
+  display:inline-block;
+  font-size:12px;
+  background-color:#4483c4;
+  border:1px solid #333;
+  cursor:pointer;
+  position:relative;
+  border-radius: 4px;
+  margin: 0 3px 2px 0;
+}
+
+.whg-taglist li .r6o-label {
+  padding:2px 8px;
+  display:inline-block;
+}
+
+.whg-taglist .r6o-delete-wrapper {
+  display:inline-block;
+  padding:2px 0;
+  color:#fff;
+  width:0;
+  height:100%;
+  overflow:hidden;
+  vertical-align:bottom;
+  font-weight:bold;
+}
+
+.whg-taglist .r6o-delete-enter-active {
+  width:14px;
+  transition:width 200ms;
+}
+
+.whg-taglist .r6o-delete-enter-done {
+  width:14px;
+}
+
+.whg-taglist .r6o-delete-exit {
+  width:14px;
+}
+
+.whg-taglist .r6o-delete-exit-active {
+  width:0;
+  transition:width 200ms;
+}

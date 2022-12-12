@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { CSSTransition } from 'react-transition-group';
 
+import './TypeList.css';
+
 const TypeList = props => {
 
   const [ showDelete, setShowDelete ] = useState(false);
@@ -15,7 +17,7 @@ const TypeList = props => {
   return (
     <div className="whg-taglist">
       {props.types.length > 0 &&
-        <ul className="r6o-taglist">
+        <ul>
           {props.types.map(tag =>
             <li key={tag.label} onClick={toggle(tag)}>
               <span className="r6o-label">{tag.label}</span>
