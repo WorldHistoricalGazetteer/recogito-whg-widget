@@ -47,7 +47,7 @@ const Sidebar = props => {
 
         <main className="accordion-content">
           <CreateNew 
-            onSave={props.onCreateNewPlace} />
+            onChange={props.onCreateNewPlace} />
         </main>
       </section>
     </aside>

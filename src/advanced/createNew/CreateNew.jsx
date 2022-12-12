@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import VocabularyModal from './vocabulary/VocabularyModal';
 import TypeList from './TypeList';
 
@@ -16,9 +16,20 @@ const CreateNew = props => {
 
   const [description, setDescription] = useState('');
 
-  const onSubmit = () => {
-    console.log('form submit');
-  }
+  const [required, setRequired] = useState(false);
+
+  useEffect(() => {
+    const metadata = {
+      title, date, types, description
+    };
+
+    if (title) {
+      props.onChange(metadata);
+      setRequired(false);
+    } else if (date || description || types.length > 0) {
+      setRequired(true);
+    }
+  }, [title, date, types, description])
 
   const onAddFeatureType = val => {
     const tag = val.label ? val : { label: val };
@@ -34,6 +45,7 @@ const CreateNew = props => {
       <h2>Use the drawing tools to create a new place.</h2>
       <section>
         <input 
+          className={required ? 'missing' : null}
           type="text" 
           name="title" 
           placeholder="Title (required)" 
@@ -65,10 +77,6 @@ const CreateNew = props => {
           placeholder="Description"
           value={description}
           onChange={evt => setDescription(evt.target.value)}   />
-      </section>
-
-      <section>
-        <button className="submit" onClick={onSubmit}>Save</button>
       </section>
 
       {modalOpen && (

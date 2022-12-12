@@ -19,6 +19,10 @@
   width: 100%;
 }
 
+.whg-create-new input.missing {
+  border: 2px solid red;
+}
+
 .whg-create-new .add-featuretype {
   background-color: none;
   color: #4483c4;
