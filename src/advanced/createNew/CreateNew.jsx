@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
+import VocabularyModal from './vocabulary/VocabularyModal';
 
 import './CreateNew.css';
 
 const CreateNew = props => {
+
+  const [modalOpen, setModalOpen] = useState(false);
 
   const onSubmit = evt => {
     evt.preventDefault();
@@ -19,7 +22,14 @@ const CreateNew = props => {
         </section>
 
         <section className="featuretypes">
-          <button className="add-featuretype">+ add feature type</button>
+          <button 
+            className="add-featuretype"
+            onClick={() => setModalOpen(true)}>+ add feature type
+          </button>
+          
+          {modalOpen && (
+            <VocabularyModal /> 
+          )}
         </section>
 
         <section>
