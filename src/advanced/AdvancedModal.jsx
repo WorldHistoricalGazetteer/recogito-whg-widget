@@ -112,15 +112,8 @@ const AdvancedModal = props => {
   }
 
   const onOk = () => {
-    if (selectedResult) {
-      props.onOk({
-        ...selectedResult,
-        properties: {
-          ...selectedResult.properties,
-          is_confirmed: true
-        }
-      });
-    } else {
+    if (editingEnabled) {
+      // Create a new place 
       const geojson = map.pm
         .getGeomanLayers()
         .map(l =>  l.toGeoJSON());
@@ -130,7 +123,8 @@ const AdvancedModal = props => {
           type: 'Feature',
           properties: {
             ...geojson[0].properties,
-            is_confirmed: true
+            is_confirmed: true,
+            ...newPlace
           },
           geometry: geojson[0].geometry,
         });
@@ -147,7 +141,16 @@ const AdvancedModal = props => {
           }
         });
       }
-    }
+    } else if (selectedResult) {
+      // Store selected result
+      props.onOk({
+        ...selectedResult,
+        properties: {
+          ...selectedResult.properties,
+          is_confirmed: true
+        }
+      });
+    } 
   }
 
   const onSearch = ({ results }) => {
