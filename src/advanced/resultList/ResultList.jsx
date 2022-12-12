@@ -38,7 +38,7 @@ const SearchResults = props => {
   return (
     <div className="whg-search-results-list">
       <ul>
-        {props.results.map(result =>
+        {props.results.features.map(result =>
           <Result 
             result={result} 
             selected={props.selected}

@@ -54,8 +54,8 @@ const GeoTaggingWidget = props => {
   const onSearch = ({ results }) => {
     setSearchResults(results);
     
-    if (results.length > 0) {
-      const updated = toBody(results[0]);
+    if (results.features.length > 0) {
+      const updated = toBody(results.features[0]);
       setBody(updated);
       props.onUpsertBody(updated);
     } else {
@@ -98,7 +98,7 @@ const GeoTaggingWidget = props => {
         <AdvancedModal 
           config={props.config}
           search={search}
-          initialResults={searchResults || [ body ]}
+          initialResults={searchResults || { features: [ body ] }}
           feature={body}
           onChangeSearch={setSearch}
           onOk={onAdvacedEditingDone}

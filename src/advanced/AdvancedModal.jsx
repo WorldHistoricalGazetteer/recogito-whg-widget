@@ -70,7 +70,7 @@ const AdvancedModal = props => {
           setOkEnabled(false);
       });
 
-      fitMap(searchResults);
+      fitMap(searchResults.features);
     }
   }, [ map, editingEnabled ]);
 
@@ -94,7 +94,7 @@ const AdvancedModal = props => {
   }, [ map, searchResults, selectedResult ]);
 
   const drawSearchResults = () => {
-    searchResults.forEach(result => {
+    searchResults.features.forEach(result => {
       L.geoJSON(result, {
         pointToLayer: function (feature, latlng) {
           const marker = (result.properties.index_id === selectedResult?.properties.index_id) ? 
@@ -151,8 +151,8 @@ const AdvancedModal = props => {
   const onSearch = ({ results }) => {
     setSearchResults(results);
 
-    if (results.length > 0) {
-      setSelectedResult(results[0]);
+    if (results.features.length > 0) {
+      setSelectedResult(results.features[0]);
       fitMap(results);
     }
   }
@@ -164,8 +164,21 @@ const AdvancedModal = props => {
   }
 
   const onLoadMore = () => {
-    whg.searchIndex(props.search, 10).then(results => {
-      console.log('more', results);
+    const { count } = searchResults;
+    const countLoaded = searchResults.features.length;
+
+    const goFuzzy = searchResults.fuzzy || countLoaded === count;
+    const offset = countLoaded === count ? 0 : countLoaded;
+
+    whg.searchIndex(props.search, offset, goFuzzy).then(results => {
+      setSearchResults({
+        ...searchResults,
+        fuzzy: goFuzzy,
+        features: [
+          ...searchResults.features,
+          ...results.features
+        ]
+      });
     });
   }
 
@@ -176,10 +189,10 @@ const AdvancedModal = props => {
       setEditingEnabled(true);
     } else {
       setEditingEnabled(false);
-      if (searchResults.length > 0) {
-        setSelectedResult(searchResults[0]);
+      if (searchResults?.features.length > 0) {
+        setSelectedResult(searchResults.features[0]);
         drawSearchResults();
-        fitMap(searchResults);
+        fitMap(searchResults.features);
       }
     }
   }
