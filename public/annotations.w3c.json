@@ -6,6 +6,10 @@
     {
       "purpose": "geotagging",
       "type": "Feature",
+      "properties": {
+        "title": "Peru",
+        "index_id": "12346608"
+      },
       "geometry": {
         "type": "Point",
         "coordinates": [
