@@ -8,8 +8,8 @@ __Features:__
 - Create new places with the built-in drawing tools
 
 ![WHG minimap popup](screenshot-01.jpg "Screenshot 1: Minimap popup")
-![Advanced search dialog](screenshot-01.jpg "Screenshot 2: Advanced search")
-![Creating new places by drawing shapes on the map](screenshot-01.jpg "Screenshot 3: Creating new places")
+![Advanced search dialog](screenshot-02.jpg "Screenshot 2: Advanced search")
+![Creating new places by drawing shapes on the map](screenshot-03.jpg "Screenshot 3: Creating new places")
 
 ## Online demos:
 
