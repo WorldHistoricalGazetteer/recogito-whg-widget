@@ -16,7 +16,7 @@ const CreateNew = props => {
 
   const [description, setDescription] = useState('');
 
-  const [required, setRequired] = useState(false);
+  const [required, setRequired] = useState(props.showRequired);
 
   useEffect(() => {
     const metadata = {
@@ -29,7 +29,11 @@ const CreateNew = props => {
     } else if (date || description || types.length > 0) {
       setRequired(true);
     }
-  }, [title, date, types, description])
+  }, [title, date, types, description]);
+
+  useEffect(() => {
+    setRequired(props.showRequired);
+  }, [props.showRequired])
 
   const onAddFeatureType = val => {
     const tag = val.label ? val : { label: val };

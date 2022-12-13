@@ -27,7 +27,7 @@ const AdvancedModal = props => {
 
   const [selectedResult, setSelectedResult] = useState(props.feature);
 
-  const [newPlace, setNewPlace] = useState();
+  const [newPlace, setNewPlace] = useState(null);
 
   const clearMap = () => {
     map.eachLayer(layer => {
@@ -112,36 +112,41 @@ const AdvancedModal = props => {
   }
 
   const onOk = () => {
-    if (editingEnabled) {
+    if (editingEnabled && newPlace) {
       // Create a new place 
       const geojson = map.pm
         .getGeomanLayers()
         .map(l =>  l.toGeoJSON());
 
-      if (geojson.length === 1) {
-        props.onOk({
-          type: 'Feature',
-          properties: {
-            ...geojson[0].properties,
-            is_confirmed: true,
-            ...newPlace
-          },
-          geometry: geojson[0].geometry,
-        });
-      } else if (geojson.length > 1) {
-        props.onOk({
-          type: 'Feature',
-          geometry: {
-            type: 'GeometryCollection',
+      // Geoman crashes if it is unmounted with an editing tool open...
+      const anyEnabled = map.pm.getGeomanLayers().some(l => l.pm._enabled);
+
+      if (!anyEnabled) {
+        if (geojson.length === 1) {
+          props.onOk({
+            type: 'Feature',
             properties: {
               ...geojson[0].properties,
-              is_confirmed: true
+              is_confirmed: true,
+              ...newPlace
             },
-            geometries: geojson.map(g => g.geometry)
-          }
-        });
+            geometry: geojson[0].geometry,
+          });
+        } else if (geojson.length > 1) {
+          props.onOk({
+            type: 'Feature',
+            geometry: {
+              type: 'GeometryCollection',
+              properties: {
+                ...geojson[0].properties,
+                is_confirmed: true
+              },
+              geometries: geojson.map(g => g.geometry)
+            }
+          });
+        }
       }
-    } else if (selectedResult) {
+    } else if (!editingEnabled && selectedResult) {
       // Store selected result
       props.onOk({
         ...selectedResult,
@@ -244,6 +249,7 @@ const AdvancedModal = props => {
           <Sidebar 
             results={searchResults} 
             selected={selectedResult}
+            showRequired={Boolean(newPlace) || editingEnabled}
             onSelectResult={onSelectFromList} 
             onLoadMore={onLoadMore} 
             onCreateNewPlace={setNewPlace}
