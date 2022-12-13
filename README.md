@@ -2,6 +2,15 @@
 
 An geotagging extension to the [RecogitoJS](https://github.com/recogito/recogito-js) and [Annotorious](https://annotorious.com) annotation tools for linking annotations to the World Historical Gazetteer. Derived from the [Recogito Geotagging Widget](https://github.com/recogito/geotagging-widget).
 
+__Features:__
+- Search the WHG gazetteer index and link your annotations to WHG gazetteer URIs
+- Use advanced search to browser WHG search suggestions, including suggestions from WHG's fuzzy search
+- Create new places with the built-in drawing tools
+
+![WHG minimap popup](screenshot-01.jpg "Screenshot 1: Minimap popup")
+![Advanced search dialog](screenshot-01.jpg "Screenshot 2: Advanced search")
+![Creating new places by drawing shapes on the map](screenshot-01.jpg "Screenshot 3: Creating new places")
+
 ## Online demos:
 
 - [Text annotation with RecogitoJS](https://worldhistoricalgazetteer.github.io/recogito-whg-widget/)
