@@ -14,7 +14,7 @@ const MinimapContents = props => {
   return (
     <>
       <TileLayer
-        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+        url={props.tileUrl} />
 
       {props.center && <Marker position={props.center} /> }
     </>
@@ -24,15 +24,13 @@ const MinimapContents = props => {
 
 const Minimap = props => {
 
-  const zoom = props.center ? 4 : 1;
-
   return (
     <MapContainer   
       key={JSON.stringify(props.center)}
       className="minimap" 
       zoomControl={false}
       center={props.center} 
-      zoom={zoom}
+      zoom={props.zoom}
       attributionControl={false}>
       <MinimapContents {...props} />
     </MapContainer>

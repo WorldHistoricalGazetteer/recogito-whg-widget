@@ -42,7 +42,14 @@ To use the plugin in you own website, include `geotagging-widget.js` script into
       window.onload = function() {
         // Geotagging widget configuration
         const config = {
-          tileUrl: 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}'
+          // WHG API base URL. Default:
+          baseURL: 'https://whgazetteer.org/api/remote/',
+
+          // The raster basemap to use. Default:
+          tileUrl: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+
+          // Default zoom of the widget mini-map. Default:
+          defaultZoom: 7
         };
 
         var r = Recogito.init({

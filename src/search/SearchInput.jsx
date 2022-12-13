@@ -3,18 +3,6 @@ import { HiSearch } from 'react-icons/hi';
 import { CgSpinnerAlt } from 'react-icons/cg';
 import { createClient } from './WHG';
 
-const getEndpoint = config => {
-  if (typeof config === 'string') {
-    const builtin = BUILTIN_ENDPOINTS[config.toLowerCase()];
-    if (builtin) 
-      return builtin;
-    else 
-      throw new Error(`${config} is not a known built-in endpoint`);
-  } else {
-    return config || BUILTIN_ENDPOINTS['osm'];
-  }
-}
-
 const SearchInput = props => {
 
   const whg = createClient(props.config);

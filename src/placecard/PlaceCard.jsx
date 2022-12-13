@@ -26,7 +26,10 @@ const PlaceCard = props => {
 
   return (
     <div className="r6o-g8r-card">
-      <Minimap center={center} />
+      <Minimap 
+        tileUrl={props.config.tileUrl} 
+        center={center} 
+        zoom={props.config.defaultZoom} />
 
       <div className="r6o-g8r-card-content-wrapper">
         <div className="r6o-g8r-card-metadata">
