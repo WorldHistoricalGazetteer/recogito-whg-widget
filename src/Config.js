@@ -6,4 +6,7 @@ export const createConfig = config => ({
 
   // Default map zoom
   defaultZoom: config?.defaultZoom || 7,
+
+  // WHG user auth token
+  token: config?.token
 });

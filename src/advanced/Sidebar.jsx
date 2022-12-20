@@ -47,6 +47,7 @@ const Sidebar = props => {
 
         <main className="accordion-content">
           <CreateNew 
+            config={props.config}
             showRequired={props.showRequired}
             onChange={props.onCreateNewPlace} />
         </main>

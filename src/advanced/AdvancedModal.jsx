@@ -247,6 +247,7 @@ const AdvancedModal = props => {
           </MapContainer>  
           
           <Sidebar 
+            config={props.config}
             results={searchResults} 
             selected={selectedResult}
             showRequired={Boolean(newPlace) || editingEnabled}

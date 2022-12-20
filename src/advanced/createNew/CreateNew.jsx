@@ -6,6 +6,8 @@ import './CreateNew.css';
 
 const CreateNew = props => {
 
+  const { token } = props.config;
+
   const [title, setTitle] = useState('');
 
   const [date, setDate] = useState('');
@@ -17,6 +19,25 @@ const CreateNew = props => {
   const [description, setDescription] = useState('');
 
   const [required, setRequired] = useState(props.showRequired);
+
+  const [datasets, setDatasets] = useState([ 'remote02' ]);
+
+  const [selectedDataset, setSelectedDataset] = useState('remote02');
+
+  useEffect(() => {
+    if (token) {
+      fetch(`${props.config.baseURL}ds/`, {
+        method: 'GET',
+        headers: {
+          'Authorization': `Token ${token}`
+        }
+      }).then(res => res.json())
+        .then(data => {
+          // TODO
+          console.log(data);
+        });
+    }
+  }, []);
 
   useEffect(() => {
     const metadata = {
@@ -43,6 +64,36 @@ const CreateNew = props => {
 
   const onRemoveFeatureType = typ =>
     setTypes(types.filter(t => t !== typ));
+
+  const onSaveToDataset = () => {
+    const place = {
+      title,
+      dataset: selectedDataset,
+      types: types.map(({ aat_id, label}) => ({
+        label, identifier: `aat:${aat_id}`
+      })),
+      descriptions: [{
+        value: description
+      }]
+    };
+
+    console.log('POSTing', place);
+
+    /*
+    fetch(`${props.config.baseURL}pl/`, {
+      method: 'POST',
+      headers: {
+        'Authorization': `Token ${token}`,
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        body: JSON.stringify(place)
+      }
+    }).then(res => res.json())
+      .then(data => {
+        console.log(data);
+      });
+    */
+  }
 
   return (
     <div className="whg-create-new">
@@ -81,6 +132,25 @@ const CreateNew = props => {
           placeholder="Description"
           value={description}
           onChange={evt => setDescription(evt.target.value)}   />
+      </section>
+
+      <section className="save-to-dataset">
+        <button 
+          disabled={required || !Boolean(token) || datasets.length === 0}
+          onClick={onSaveToDataset}>
+
+          Save to Dataset
+
+        </button>
+        
+        <select
+          disabled={!Boolean(token)} 
+          value={datasets.length > 0 ? datasets[0] : null}
+          onChange={evt => setSelectedDataset(evt.targetValue)}>
+
+          {datasets.map(d => <option key={d} value={d}>{d}</option>)}
+
+        </select>
       </section>
 
       {modalOpen && (
