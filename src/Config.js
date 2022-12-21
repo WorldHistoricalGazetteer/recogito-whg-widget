@@ -11,5 +11,5 @@ export const createConfig = config => ({
   token: config?.token,
 
   // WHG requires ccodes field...
-  ccodes: config.ccodes
+  ccodes: config.ccodes || []
 });
