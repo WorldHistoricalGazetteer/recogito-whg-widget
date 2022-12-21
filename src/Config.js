@@ -8,5 +8,8 @@ export const createConfig = config => ({
   defaultZoom: config?.defaultZoom || 7,
 
   // WHG user auth token
-  token: config?.token
+  token: config?.token,
+
+  // WHG requires ccodes field...
+  ccodes: config.ccodes
 });

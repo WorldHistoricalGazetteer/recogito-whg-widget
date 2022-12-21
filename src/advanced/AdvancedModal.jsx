@@ -207,6 +207,32 @@ const AdvancedModal = props => {
     }
   }
 
+  const onSaveToDataset = place => {
+    const geojson = map.pm
+      .getGeomanLayers()
+      .map(l =>  l.toGeoJSON());
+
+    const withGeo = {
+      ...place,
+      geoms: geojson.map(f => ({
+        jsonb: { ...f.geometry }
+      }))
+    }
+
+    fetch(`${props.config.baseURL}remote/pl/`, {
+      method: 'POST',
+      headers: {
+        'Authorization': `Token ${props.config.token}`,
+        'Accept': 'application/json',
+        'Content-Type': 'application/json' 
+      },
+      body: JSON.stringify(withGeo)
+    }).then(res => res.json())
+      .then(data => {
+        console.log(data);
+      })
+  }
+
   return ReactDOM.createPortal(
     <div className="r6o-geotagging-advanced-container">
       <div className="r6o-geotagging-advanced-modal" role="dialog">
@@ -254,6 +280,7 @@ const AdvancedModal = props => {
             onSelectResult={onSelectFromList} 
             onLoadMore={onLoadMore} 
             onCreateNewPlace={setNewPlace}
+            onSaveToDataset={onSaveToDataset}
             onTogglePanel={onTogglePanel} />
         </main>
       </div>

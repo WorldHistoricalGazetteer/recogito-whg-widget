@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { nanoid } from 'nanoid';
 import VocabularyModal from './vocabulary/VocabularyModal';
 import TypeList from './TypeList';
 
@@ -32,8 +33,10 @@ const CreateNew = props => {
           'Authorization': `Token ${token}`
         }
       }).then(res => res.json())
-        .then(({ results }) =>
-          setDatasets(results.map(r => r.label)));
+        .then(({ results }) => {
+          setSelectedDataset(results[0].label);
+          setDatasets(results.map(r => r.label));
+        });
     }
   }, []);
 
@@ -66,31 +69,28 @@ const CreateNew = props => {
   const onSaveToDataset = () => {
     const place = {
       title,
+      src_id: nanoid(),
       dataset: selectedDataset,
+      ccodes: props.config.ccodes,
+      names: [{ 
+        toponym: title,
+        jsonb: {
+          toponym: title
+        }
+      }],
       types: types.map(({ aat_id, label}) => ({
-        label, identifier: `aat:${aat_id}`
+        jsonb: {
+          label, identifier: `aat:${aat_id}`
+        }
       })),
       descriptions: [{
-        value: description
+        jsonb: {
+          value: description
+        }
       }]
     };
 
-    console.log('POSTing', place);
-
-    /*
-    fetch(`${props.config.baseURL}remote/pl/`, {
-      method: 'POST',
-      headers: {
-        'Authorization': `Token ${token}`,
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-        body: JSON.stringify(place)
-      }
-    }).then(res => res.json())
-      .then(data => {
-        console.log(data);
-      });
-    */
+    props.onSaveToDataset(place);
   }
 
   return (

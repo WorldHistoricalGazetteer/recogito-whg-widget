@@ -49,7 +49,8 @@ const Sidebar = props => {
           <CreateNew 
             config={props.config}
             showRequired={props.showRequired}
-            onChange={props.onCreateNewPlace} />
+            onChange={props.onCreateNewPlace} 
+            onSaveToDataset={props.onSaveToDataset} />
         </main>
       </section>
     </aside>
