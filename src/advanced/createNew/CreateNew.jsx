@@ -20,22 +20,20 @@ const CreateNew = props => {
 
   const [required, setRequired] = useState(props.showRequired);
 
-  const [datasets, setDatasets] = useState([ 'remote02' ]);
+  const [datasets, setDatasets] = useState([]);
 
-  const [selectedDataset, setSelectedDataset] = useState('remote02');
+  const [selectedDataset, setSelectedDataset] = useState();
 
   useEffect(() => {
     if (token) {
-      fetch(`${props.config.baseURL}ds/`, {
+      fetch(`${props.config.baseURL}remote/ds/`, {
         method: 'GET',
         headers: {
           'Authorization': `Token ${token}`
         }
       }).then(res => res.json())
-        .then(data => {
-          // TODO
-          console.log(data);
-        });
+        .then(({ results }) =>
+          setDatasets(results.map(r => r.label)));
     }
   }, []);
 
@@ -80,7 +78,7 @@ const CreateNew = props => {
     console.log('POSTing', place);
 
     /*
-    fetch(`${props.config.baseURL}pl/`, {
+    fetch(`${props.config.baseURL}remote/pl/`, {
       method: 'POST',
       headers: {
         'Authorization': `Token ${token}`,
@@ -146,7 +144,7 @@ const CreateNew = props => {
         <select
           disabled={!Boolean(token)} 
           value={datasets.length > 0 ? datasets[0] : null}
-          onChange={evt => setSelectedDataset(evt.targetValue)}>
+          onChange={evt => setSelectedDataset(evt.target.value)}>
 
           {datasets.map(d => <option key={d} value={d}>{d}</option>)}
 

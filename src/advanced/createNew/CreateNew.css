@@ -63,3 +63,7 @@
   font-size: 15px;
   cursor: pointer;
 }
+
+.whg-create-new .save-to-dataset option {
+  color: #000;
+}

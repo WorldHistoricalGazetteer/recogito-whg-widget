@@ -1,5 +1,5 @@
 export const createConfig = config => ({
-  baseURL: config.baseURL || 'https://whgazetteer.org/api/remote/',
+  baseURL: config.baseURL || 'https://whgazetteer.org/',
 
   // Tile URL
   tileUrl: config?.tileUrl || 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',

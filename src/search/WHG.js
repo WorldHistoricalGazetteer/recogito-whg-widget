@@ -4,6 +4,8 @@ export const createClient = config => {
   if (!baseURL.endsWith('/'))
     baseURL += '/';
 
+  baseURL += 'api/remote/';
+
   const searchIndex = (query, offset = 0, fuzzy = false) => {
     let url = `${baseURL}?name=${query}`; // &offset=${offset}`;
 
