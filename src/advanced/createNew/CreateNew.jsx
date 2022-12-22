@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { nanoid } from 'nanoid';
 import VocabularyModal from './vocabulary/VocabularyModal';
 import TypeList from './TypeList';
 
@@ -69,7 +68,6 @@ const CreateNew = props => {
   const onSaveToDataset = () => {
     const place = {
       title,
-      src_id: nanoid(),
       dataset: selectedDataset,
       ccodes: props.config.ccodes,
       names: [{ 
