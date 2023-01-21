@@ -15,6 +15,7 @@ module.exports = {
     libraryTarget: 'umd',
     libraryExport: 'default'
   },
+  mode: 'development',
   externals: {
     'react': 'React',
     'react-dom': 'ReactDOM'
@@ -39,9 +40,9 @@ module.exports = {
   },
   module: {
     rules: [
-      { 
-        test: /\.(js|jsx)$/, 
-        use: { 
+      {
+        test: /\.(js|jsx)$/,
+        use: {
           loader: 'babel-loader' ,
           options: {
             "presets": [

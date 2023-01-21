@@ -5,13 +5,15 @@ import { createClient } from './WHG';
 
 const SearchInput = props => {
 
+  // console.log('props in SearchInput', props)
+
   const whg = createClient(props.config);
 
   const [loading, setLoading] = useState(false);
 
   const [search, setSearch] = useState();
 
-  useEffect(() => { 
+  useEffect(() => {
     if (props.value && props.initialSearch) {
       setSearch(props.value);
       query(props.value);
@@ -33,7 +35,7 @@ const SearchInput = props => {
     setSearch(value);
     props.onChange(value);
   }
-  
+
   const onKeyDown = evt => {
     if (evt.key === 'Enter')
       query(search);
@@ -45,12 +47,12 @@ const SearchInput = props => {
         <HiSearch />
       </button>
 
-      <input 
+      <input
         placeholder="Search for a place..."
         value={search}
         onChange={onChange}
         onKeyDown={onKeyDown}/>
-        
+
       {loading &&
         <CgSpinnerAlt className="rotating" />
       }

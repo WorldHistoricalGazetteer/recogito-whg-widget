@@ -55,10 +55,10 @@ const AdvancedModal = props => {
       ], {
         animate:false,
         padding: [30, 30]
-      });  
+      });
     }
   }
-  
+
   useEffect(() => {
     if (map) {
       // Dis- or enable the OK button depending on whether there's a feature
@@ -78,13 +78,13 @@ const AdvancedModal = props => {
 
   useEffect(() => {
     if (editingEnabled) {
-      map?.pm?.addControls({ 
+      map?.pm?.addControls({
         position: 'topleft',
         drawCircle: false,
-        drawCircleMarker: false 
+        drawCircleMarker: false
       });
     } else {
-      map?.pm?.removeControls();  
+      map?.pm?.removeControls();
     }
   }, [ editingEnabled ]);
 
@@ -99,7 +99,7 @@ const AdvancedModal = props => {
     searchResults.features.forEach(result => {
       L.geoJSON(result, {
         pointToLayer: function (feature, latlng) {
-          const marker = (result.properties.index_id === selectedResult?.properties.index_id) ? 
+          const marker = (result.properties.index_id === selectedResult?.properties.index_id) ?
             L.marker(latlng) :
             L.marker(latlng, { icon: GreyMarker });
 
@@ -113,7 +113,7 @@ const AdvancedModal = props => {
 
   const onOk = () => {
     if (editingEnabled && newPlace) {
-      // Create a new place 
+      // Create a new place
       const geojson = map.pm
         .getGeomanLayers()
         .map(l =>  l.toGeoJSON());
@@ -155,7 +155,7 @@ const AdvancedModal = props => {
           is_confirmed: true
         }
       });
-    } 
+    }
   }
 
   const onSearch = ({ results }) => {
@@ -218,26 +218,29 @@ const AdvancedModal = props => {
         jsonb: { ...f.geometry }
       }))
     }
-
+    console.log('withGeo', withGeo)
     fetch(`${props.config.baseURL}remote/pl/`, {
       method: 'POST',
       headers: {
         'Authorization': `Token ${props.config.token}`,
         'Accept': 'application/json',
-        'Content-Type': 'application/json' 
+        'Content-Type': 'application/json'
       },
       body: JSON.stringify(withGeo)
-    }).then(res => res.json())
+    }).then(
+        res => res.json()
+      )
       .then(data => {
         console.log(data);
       })
+      // error b/c result is not json data
   }
 
   return ReactDOM.createPortal(
     <div className="r6o-geotagging-advanced-container">
       <div className="r6o-geotagging-advanced-modal" role="dialog">
         <header>
-          <SearchInput 
+          <SearchInput
             config={props.config}
             value={props.search}
             onChange={props.onChangeSearch}
@@ -247,11 +250,11 @@ const AdvancedModal = props => {
             <button
               className="r6o-geotagging-advanced-modal-cancel"
               onClick={props.onCancel}>
-              <IoCloseOutline /> 
+              <IoCloseOutline />
               <span>Cancel</span>
             </button>
 
-            <button 
+            <button
               className="r6o-geotagging-advanced-modal-ok"
               disabled={!okEnabled}
               onClick={onOk}>
@@ -270,15 +273,15 @@ const AdvancedModal = props => {
 
             <TileLayer
               url={props.config.tileUrl} />
-          </MapContainer>  
-          
-          <Sidebar 
+          </MapContainer>
+
+          <Sidebar
             config={props.config}
-            results={searchResults} 
+            results={searchResults}
             selected={selectedResult}
             showRequired={Boolean(newPlace) || editingEnabled}
-            onSelectResult={onSelectFromList} 
-            onLoadMore={onLoadMore} 
+            onSelectResult={onSelectFromList}
+            onLoadMore={onLoadMore}
             onCreateNewPlace={setNewPlace}
             onSaveToDataset={onSaveToDataset}
             onTogglePanel={onTogglePanel} />

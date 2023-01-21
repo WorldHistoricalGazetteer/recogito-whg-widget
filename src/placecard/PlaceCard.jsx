@@ -6,6 +6,8 @@ import Minimap from './Minimap';
 
 const PlaceCard = props => {
 
+  console.log('props in PlaceCard', props)
+
   const { feature } = props;
 
   const center = centroid(feature)?.geometry.coordinates.slice().reverse();
@@ -24,46 +26,49 @@ const PlaceCard = props => {
     });
   }
 
+  const variants = properties.variants.join(', ')
+
   return (
     <div className="r6o-g8r-card">
-      <Minimap 
-        tileUrl={props.config.tileUrl} 
-        center={center} 
+      <Minimap
+        tileUrl={props.config.tileUrl}
+        center={center}
         zoom={props.config.defaultZoom} />
 
       <div className="r6o-g8r-card-content-wrapper">
         <div className="r6o-g8r-card-metadata">
           <div>
-            <h3>{properties.title}</h3>
+            <h3>{properties.title} ({properties.ccodes})</h3>
             <p className="uri">
               <a href={permalink} target="_blank">whg:{properties.index_id}</a>
             </p>
+            <div className="variant-list">{variants}</div>
           </div>
 
           {properties.is_confirmed &&
-            <button 
+            <button
               className="edit-match"
               onClick={props.onGoAdvanced}>
               <MdModeEdit /> <span>Change</span>
             </button>
           }
-          
+
           {!properties.is_confirmed &&
             <div className="suggestion-warning">
               <span className="warning">
-                <ImWarning /> <span>Suggestion</span>
+                <ImWarning /> <span>Top suggestion</span>
               </span>
-              
+
               <div className="buttons">
-                <button 
+                <button
                   onClick={props.onGoAdvanced}>
                   Change
                 </button>
-                
+
                 <button
                   onClick={onConfirm}>
                   Confirm
-                </button>    
+                </button>
               </div>
             </div>
           }

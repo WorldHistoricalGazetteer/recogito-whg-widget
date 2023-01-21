@@ -35,6 +35,7 @@ const CreateNew = props => {
         .then(({ results }) => {
           setSelectedDataset(results[0].label);
           setDatasets(results.map(r => r.label));
+          console.log(results[0].label)
         });
     }
   }, []);
@@ -70,7 +71,7 @@ const CreateNew = props => {
       title,
       dataset: selectedDataset,
       ccodes: props.config.ccodes,
-      names: [{ 
+      names: [{
         toponym: title,
         jsonb: {
           toponym: title
@@ -95,28 +96,28 @@ const CreateNew = props => {
     <div className="whg-create-new">
       <h2>Use the drawing tools to create a new place.</h2>
       <section>
-        <input 
+        <input
           className={required ? 'missing' : null}
-          type="text" 
-          name="title" 
-          placeholder="Title (required)" 
-          value={title} 
+          type="text"
+          name="title"
+          placeholder="Title (required)"
+          value={title}
           onChange={evt => setTitle(evt.target.value)} />
 
-        <input 
-          type="text" 
-          name="date" 
-          placeholder="Date" 
+        <input
+          type="text"
+          name="date"
+          placeholder="Date"
           value={date}
           onChange={evt => setDate(evt.target.value)} />
       </section>
 
       <section className="featuretypes">
-        <TypeList 
-          types={types} 
+        <TypeList
+          types={types}
           onDelete={onRemoveFeatureType} />
 
-        <button 
+        <button
           className="add-featuretype"
           onClick={() => setModalOpen(true)}>+ add feature type
         </button>
@@ -124,23 +125,23 @@ const CreateNew = props => {
 
       <section>
         <textarea n
-          name="description" 
+          name="description"
           placeholder="Description"
           value={description}
           onChange={evt => setDescription(evt.target.value)}   />
       </section>
 
       <section className="save-to-dataset">
-        <button 
+        <button
           disabled={required || !Boolean(token) || datasets.length === 0}
           onClick={onSaveToDataset}>
 
           Save to Dataset
 
         </button>
-        
+
         <select
-          disabled={!Boolean(token)} 
+          disabled={!Boolean(token)}
           value={datasets.length > 0 ? datasets[0] : null}
           onChange={evt => setSelectedDataset(evt.target.value)}>
 
@@ -150,8 +151,8 @@ const CreateNew = props => {
       </section>
 
       {modalOpen && (
-        <VocabularyModal 
-          onAddFeatureType={onAddFeatureType} /> 
+        <VocabularyModal
+          onAddFeatureType={onAddFeatureType} />
       )}
     </div>
   )

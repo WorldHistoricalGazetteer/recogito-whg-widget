@@ -9,7 +9,7 @@
     <script src="geotagging-widget.js"></script>
   </head>
   <body>
-    <div id="content">    
+    <div id="content">
       <img id="image" src="Epitome_theatri_Ortelianii.jpg">
     </div>
   </div>
@@ -19,6 +19,7 @@
         const config = {
           tileUrl: 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}',
           token: '1b7be4ea1d84020e483065524b3ccbcf15c18b17'
+          // token: 'e7c98a39436fde0c7f87a63f1f66e51139b929c9'
         }
 
         anno = Annotorious.init({
@@ -40,8 +41,8 @@
 
         anno.on('deleteAnnotation', function(annotation) {
           console.log('deleted', annotation);
-        });    
-        
+        });
+
         anno.loadAnnotations('annotations.w3c.json');
       }
     </script>

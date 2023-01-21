@@ -4,6 +4,8 @@ import './ResultList.css';
 
 const Result = props => {
 
+  // console.log('props in ResultList', props)
+
   const { result, selected, onClick } = props;
 
   const { properties } = result;
@@ -11,7 +13,7 @@ const Result = props => {
   const permalink = `https://whgazetteer.org/places/${properties.index_id}/portal`;
 
   return (
-    <li 
+    <li
       className={selected.properties.index_id === result.properties.index_id ? 'selected' : null}
       onClick={onClick}>
       <h3>
@@ -21,6 +23,11 @@ const Result = props => {
       </h3>
       <p className="uri">
         <a href={permalink} target="_blank">whg:{properties.index_id}</a>
+        {properties.placetypes?.length > 0 && (
+          <span className="placetypes">
+            {properties.placetypes.join(', ')}
+          </span>
+        )}
       </p>
       {properties.variants?.length > 0 && (
         <p className="names">
@@ -39,13 +46,13 @@ const SearchResults = props => {
     <div className="whg-search-results-list">
       <ul>
         {props.results.features.map(result =>
-          <Result 
-            result={result} 
+          <Result
+            result={result}
             selected={props.selected}
             onClick={() => props.onSelect(result)} />
         )}
       </ul>
-      <button 
+      <button
         className="load-more"
         onClick={props.onLoadMore}>+ Load more</button>
     </div>

@@ -3,6 +3,14 @@
   height:140px;
 }
 
+.r6o-g8r-card .variant-list {
+  margin-top: 2px;
+  font-size: .8rem;
+  line-height: .9rem;
+  color: #666;
+  font-style: italic;
+  overflow: hidden;
+}
 .r6o-g8r-card .minimap {
   position:absolute;
   width:100%;

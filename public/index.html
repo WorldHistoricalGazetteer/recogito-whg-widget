@@ -46,12 +46,17 @@
         him without ceasing and would not let him get home.
       </p>
     </div>
-
     <script type="text/javascript">
+      // NB the interface can be extended to provide config options per document
       window.onload = function() {
         const config = {
           tileUrl: 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}',
-          token: '1b7be4ea1d84020e483065524b3ccbcf15c18b17'
+          // authenticate to WHG w/per-user token
+          token: '1b7be4ea1d84020e483065524b3ccbcf15c18b17',
+          // write year or timespan to new Place
+          when: [-800,-700],
+          // constrain searches to study area
+          // area: 412
         };
 
         var r = Recogito.init({
