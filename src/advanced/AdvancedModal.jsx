@@ -231,9 +231,9 @@ const AdvancedModal = props => {
         res => res.json()
       )
       .then(data => {
+        // POSTed record
         console.log(data);
       })
-      // error b/c result is not json data
   }
 
   return ReactDOM.createPortal(

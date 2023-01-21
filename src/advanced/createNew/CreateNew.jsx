@@ -71,6 +71,9 @@ const CreateNew = props => {
       title,
       dataset: selectedDataset,
       ccodes: props.config.ccodes,
+      // per document timespan
+      minmax: props.config.when,
+      timespans: [props.config.when],
       names: [{
         toponym: title,
         jsonb: {
