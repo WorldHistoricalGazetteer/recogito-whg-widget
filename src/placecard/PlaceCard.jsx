@@ -26,7 +26,7 @@ const PlaceCard = props => {
     });
   }
 
-  const variants = properties.variants.join(', ')
+  const variants = properties.variants?properties.variants.join(', '):''
 
   return (
     <div className="r6o-g8r-card">
