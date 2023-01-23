@@ -73,7 +73,6 @@ const CreateNew = props => {
       ccodes: props.config.ccodes,
       // per document timespan
       minmax: props.config.when,
-      timespans: [props.config.when],
       names: [{
         toponym: title,
         jsonb: {
@@ -110,8 +109,11 @@ const CreateNew = props => {
         <input
           type="text"
           name="date"
+          // placeholder={props.config.when}
           placeholder="Date"
-          value={date}
+          // pull per-document date/range from config
+          value={props.config.when}
+          // value={date}
           onChange={evt => setDate(evt.target.value)} />
       </section>
 

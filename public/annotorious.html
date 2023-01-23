@@ -18,8 +18,12 @@
         // Geotagging widget config
         const config = {
           tileUrl: 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}',
-          token: '1b7be4ea1d84020e483065524b3ccbcf15c18b17'
-          // token: 'e7c98a39436fde0c7f87a63f1f66e51139b929c9'
+          // authenticate to WHG w/per-user token
+          token: '1b7be4ea1d84020e483065524b3ccbcf15c18b17',
+          // write per-document year or timespan to new Place
+          when: [1500,1650],
+          // constrain searches to study area
+          area: 415
         }
 
         anno = Annotorious.init({
