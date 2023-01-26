@@ -10,7 +10,8 @@ const CreateNew = props => {
 
   const [title, setTitle] = useState('');
 
-  const [date, setDate] = useState('');
+  const [date, setDate] = useState(props.config.when);
+  // const [date, setDate] = useState('');
 
   const [modalOpen, setModalOpen] = useState(false);
 
@@ -67,12 +68,14 @@ const CreateNew = props => {
     setTypes(types.filter(t => t !== typ));
 
   const onSaveToDataset = () => {
+    console.log('date', date)
     const place = {
       title,
       dataset: selectedDataset,
       ccodes: props.config.ccodes,
       // per document timespan
-      minmax: props.config.when,
+      minmax: date.replace(' ','').split(','),
+      // minmax: props.config.when,
       names: [{
         toponym: title,
         jsonb: {
@@ -94,6 +97,7 @@ const CreateNew = props => {
     props.onSaveToDataset(place);
   }
 
+
   return (
     <div className="whg-create-new">
       <h2>Use the drawing tools to create a new place.</h2>
@@ -112,8 +116,8 @@ const CreateNew = props => {
           // placeholder={props.config.when}
           placeholder="Date"
           // pull per-document date/range from config
-          value={props.config.when}
-          // value={date}
+          // value={props.config.when}
+          value={date}
           onChange={evt => setDate(evt.target.value)} />
       </section>
 
