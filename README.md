@@ -1,6 +1,6 @@
 # Recogito WHG Geotagging Widget
 
-An geotagging extension to the [RecogitoJS](https://github.com/recogito/recogito-js) and [Annotorious](https://annotorious.com) annotation tools for linking annotations to the World Historical Gazetteer. Derived from the [Recogito Geotagging Widget](https://github.com/recogito/geotagging-widget).
+A geotagging extension to the [RecogitoJS](https://github.com/recogito/recogito-js) and [Annotorious](https://annotorious.com) annotation tools for linking annotations to the World Historical Gazetteer. Derived from the [Recogito Geotagging Widget](https://github.com/recogito/geotagging-widget).
 
 __Features:__
 - Search the WHG gazetteer index and link your annotations to WHG gazetteer URIs
@@ -12,6 +12,8 @@ __Features:__
 ![Creating new places by drawing shapes on the map](screenshot-03.jpg "Screenshot 3: Creating new places")
 
 ## Online demos:
+
+**NOTE:** The place creation function of these working demos writes to a WHG dataset 'geotagging'. To view the contents of that dataset on the WHG site, you must be added as a "collaborator." The API on the World Historical Gazetteer site that enables this functionality is in beta. Please email karl [at] kgeographer.org to request enabling read access in the GUI, or to request full use permissions of the remote API.
 
 - [Text annotation with RecogitoJS](https://worldhistoricalgazetteer.github.io/recogito-whg-widget/)
 - [Image annotation with Annotorious](https://worldhistoricalgazetteer.github.io/recogito-whg-widget/annotorious.html)

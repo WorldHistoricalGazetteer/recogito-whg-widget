@@ -74,7 +74,7 @@ const CreateNew = props => {
       dataset: selectedDataset,
       ccodes: props.config.ccodes,
       // per document timespan
-      minmax: date.replace(' ','').split(','),
+      minmax: typeof date == 'string'?date.replace(' ','').split(','):date,
       // minmax: props.config.when,
       names: [{
         toponym: title,
