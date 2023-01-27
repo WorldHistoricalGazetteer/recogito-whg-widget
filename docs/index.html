@@ -6,7 +6,6 @@
     <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/@recogito/recogito-js@1.7.1/dist/recogito.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/@recogito/recogito-js@1.7.1/dist/recogito.min.js"></script>
-    <script src="geotagging-widget.js"></script>
     <style>
       html, body {
         padding:10px 20px;
@@ -47,13 +46,17 @@
         him without ceasing and would not let him get home.
       </p>
     </div>
-
     <script type="text/javascript">
+      // NB the interface can be extended to provide config options per document
       window.onload = function() {
         const config = {
           tileUrl: 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}',
-          defaultOrigin: [ 48, 16 ],
-          search: 'osm'
+          // authenticate to WHG w/per-user token
+          token: '1b7be4ea1d84020e483065524b3ccbcf15c18b17',
+          // write per-document year or timespan to new Place
+          when: [-700, -800],
+          // constrain searches to study area
+          area: 412
         };
 
         var r = Recogito.init({
