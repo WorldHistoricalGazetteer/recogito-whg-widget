@@ -4,8 +4,6 @@ import './ResultList.css';
 
 const Result = props => {
 
-  // console.log('props in ResultList', props)
-
   const { result, selected, onClick } = props;
 
   const { properties } = result;

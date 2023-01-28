@@ -6,7 +6,7 @@ import Minimap from './Minimap';
 
 const PlaceCard = props => {
 
-  console.log('props in PlaceCard', props)
+  // console.log('props in PlaceCard', props)
 
   const { feature } = props;
 

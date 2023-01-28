@@ -218,7 +218,7 @@ const AdvancedModal = props => {
         jsonb: { ...f.geometry }
       }))
     }
-    console.log('withGeo', withGeo)
+    // console.log('withGeo', withGeo)
     fetch(`${props.config.baseURL}remote/pl/`, {
       method: 'POST',
       headers: {

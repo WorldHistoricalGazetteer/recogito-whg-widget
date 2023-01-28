@@ -5,8 +5,6 @@ import { createClient } from './WHG';
 
 const SearchInput = props => {
 
-  // console.log('props in SearchInput', props)
-
   const whg = createClient(props.config);
 
   const [loading, setLoading] = useState(false);

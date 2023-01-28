@@ -36,7 +36,7 @@ const CreateNew = props => {
         .then(({ results }) => {
           setSelectedDataset(results[0].label);
           setDatasets(results.map(r => r.label));
-          console.log(results[0].label)
+          // console.log(results[0].label)
         });
     }
   }, []);
@@ -68,7 +68,7 @@ const CreateNew = props => {
     setTypes(types.filter(t => t !== typ));
 
   const onSaveToDataset = () => {
-    console.log('date', date)
+    // console.log('date', date)
     const place = {
       title,
       dataset: selectedDataset,

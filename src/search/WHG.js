@@ -21,7 +21,7 @@ export const createClient = config => {
       url += '&area='+config.area;
       // url += `&area=${area}`;
 
-    console.log('url', url)
+    // console.log('url', url)
 
     // return fetch(url, {mode:"no-cors"}).then(res => res.json());
     return fetch(url).then(res => res.json());
