@@ -12,7 +12,7 @@ __Features:__
 Fig. 1 - Search presents top suggestion, constrained here by relevent WHG study area.
 
 ![Advanced search dialog](screenshot02.jpg "Screenshot 2: Advanced search")
-Fig. 2 - If top suggestion is incorrect, review others with options to extend search as 'fuzzy' and/or create new.
+Fig. 2 - If top suggestion is incorrect, review others with options to extend search as 'fuzzy' ("Load more") and/or create new record.
 
 ![Creating new places by drawing shapes on the map](screenshot03.jpg "Screenshot 3: Creating new places")
 Fig. 3 - Create new Place feature and add to existing WHG dataset owned by user. Pre-filled per-document dates can be modified in the form.
